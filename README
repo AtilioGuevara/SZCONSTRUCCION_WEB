@@ -1,0 +1,98 @@
+# SZ Construccion
+
+Sitio web corporativo para una empresa constructora. El proyecto usa HTML, CSS y JavaScript nativos, sin frameworks ni dependencias externas.
+
+## Objetivo
+
+Transmitir profesionalismo, confianza y atencion al detalle mediante una identidad visual editorial y una composicion distinta para cada tipo de contenido.
+
+## Estructura
+
+```text
+index.html                     Inicio: hero con video, cifras, servicios, fundadora y proyectos destacados
+nosotros.html                  Fundadora, misión, visión y servicios
+proyectos.html                 Catálogo con los 11 proyectos y filtros
+proyectos/proyecto-1.html      JM 1 · Puerto El Triunfo, Usulután
+proyectos/proyecto-2.html      LM 2 · Riverside Gardens
+proyectos/proyecto-3.html      RV 3 · Montecarlo Jordán, San Miguel
+proyectos/proyecto-4.html      PV 4 · Riverside Park
+proyectos/proyecto-5.html      AA 5 · Santa Ana
+proyectos/proyecto-6.html      VB 6 · Riverside, San Miguel
+proyectos/proyecto-7.html      Restaurante Fuego y Brazas · Usulután
+proyectos/proyecto-8.html      Hotel Silvias Inn · Usulután
+proyectos/proyecto-9.html      Remodelación despacho jurídico · Usulután
+proyectos/proyecto-10.html     Casa entre montañas · Juayúa (en proceso)
+proyectos/proyecto-11.html     Hotel Mario Biker · San Miguel (en proceso)
+css/style.css                  Base global, header, inicio y footer
+css/nosotros.css               Página Nosotros
+css/proyectos.css              Catálogo
+css/proyecto.css               Fichas individuales
+js/main.js                     Menú, carrusel, lightbox, filtros y formulario
+images/proyectos/proyecto-N/   Fotos de cada proyecto (la N coincide con el número del catálogo)
+videos/proyecto-1/             Recorrido JM (también se usa en el inicio)
+videos/proyecto-2/             Recorridos LM
+```
+
+La numeración de carpetas y fichas coincide con el CATÁLOGO SZ CONSTRUCCIÓN 2026.
+Cada ficha tiene su contenido escrito directamente en el HTML (ya no se reemplaza con JavaScript).
+
+### Agregar fotos o un proyecto nuevo
+
+- Fotos: guardar en `images/proyectos/proyecto-N/` como JPG de máximo 1800 px por lado
+  (unos 200-400 KB). Copiar un bloque `project-slide` de la ficha y cambiar `src`, `alt` y `--slide-bg`.
+  Los puntos del carrusel se generan solos si faltan.
+- Proyecto nuevo: duplicar la ficha más parecida, cambiar textos y fotos, y copiar una tarjeta
+  `project-card` en `proyectos.html` con su `data-category` (residencial, comercial o remodelacion)
+  y `data-status` (terminado o en-proceso).
+- Videos: exportar en MP4 H.264 (no HEVC/H.265, que no se reproduce en Chrome ni Firefox).
+
+## Identidad visual
+
+```css
+--black: #111111;
+--black-soft: #1a1a1a;
+--gray: #777777;
+--gray-light: #d8d8d8;
+--white: #f5f5f2;
+--gold: #c8a24a;
+--container: 1280px;
+```
+
+La identidad se comparte entre las paginas, pero cada vista conserva su propio ritmo:
+
+- Inicio: presentacion corporativa e impacto visual.
+- Nosotros: relato institucional y proposito.
+- Proyectos: catalogo editorial sin carrusel.
+- Ficha individual: galeria fotografica y datos tecnicos.
+- Contacto: formulario integrado en el footer global.
+- Inicio: informacion central, proceso de trabajo, testimonios y acceso a proyectos.
+- Nosotros: historia, proposito y cumplimiento.
+
+## Comportamiento
+
+- El menu movil se abre mediante el boton, se cierra al navegar y responde a `Escape`.
+- Las galerias usan flechas y puntos, con controles accesibles por teclado.
+- La animacion inicial respeta `prefers-reduced-motion`.
+- El formulario valida los campos, usa un campo trampa contra spam y envía con FormSubmit.
+- Los enlaces internos usan rutas relativas compatibles con la estructura actual.
+
+## Pendientes antes de publicar
+
+- Confirmar el área de LM 2: el catálogo indica 40 m², que parece un error con 5 habitaciones y 6 baños.
+- Confirmar el nombre del restaurante: el catálogo dice "Fuego y Brazas", el texto "Fuego y Braza" y el rótulo "Fuego Brasa".
+- Reemplazar las fotos de JM 1 y Hotel Mario Biker por las originales: se extrajeron del PDF y tienen baja resolución.
+- Verificar que el correo de FormSubmit (szconstruccion20@gmail.com) esté activado.
+
+## Convenciones de mantenimiento
+
+- Mantener la paleta y las variables CSS globales.
+- Preferir clases CSS sobre estilos inline.
+- Usar comentarios breves solo para marcar una decision, una dependencia o una seccion amplia.
+- Mantener textos alternativos descriptivos en imagenes.
+- Asociar cada campo de formulario con su `label` mediante `for` e `id`.
+- No duplicar logica de carruseles: `main.js` comparte la inicializacion entre proyectos y servicios.
+- Mantener el logo flotante fijo en todas las fichas de proyecto para facilitar el regreso al inicio.
+
+## Ejecucion local
+
+El sitio es estatico. Puede abrirse directamente desde `index.html` o servirse con cualquier servidor local estatico. No requiere instalacion de paquetes.

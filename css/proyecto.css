@@ -1,0 +1,766 @@
+/* =========================================
+   PÁGINA INDIVIDUAL DEL PROYECTO
+========================================= */
+
+/* =========================================
+   LOGO FLOTANTE DEL PROYECTO
+   Fijo en todas las fichas para volver al inicio.
+   Se ubica en la esquina inferior para no tapar fotografías ni textos.
+========================================= */
+
+.project-floating-logo {
+    position: fixed;
+    right: clamp(16px, 2.5vw, 32px);
+    bottom: clamp(16px, 2.5vw, 32px);
+    z-index: 40;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 64px;
+    height: 64px;
+    padding: 10px;
+
+    border: 1px solid rgba(200, 162, 74, 0.45);
+    border-radius: 50%;
+    background: rgba(17, 17, 17, 0.88);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-floating-logo:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+}
+
+.project-floating-logo:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+
+.project-floating-logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.project-floating-logo span {
+    display: none;
+}
+
+.lightbox-open .project-floating-logo {
+    display: none;
+}
+
+/* =========================================
+   GALERÍA
+========================================= */
+
+.project-gallery {
+    padding: 80px 0 70px;
+    background: var(--white);
+    color: var(--black);
+}
+
+/* El header es absoluto (110px), por eso la galería deja ese espacio arriba. */
+.project-gallery--offset {
+    padding-top: 170px;
+}
+
+.project-gallery__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.project-gallery__heading h1 {
+    margin-top: 18px;
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 0.95;
+    letter-spacing: -3px;
+    font-weight: 700;
+}
+
+.project-gallery__location {
+    margin-top: 16px;
+    color: #777777;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.project-gallery__counter {
+    flex-shrink: 0;
+    color: #888888;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.project-gallery__note {
+    margin-top: 18px;
+    color: #8a6a22;
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* =========================================
+   CARRUSEL
+========================================= */
+
+.project-slider {
+    width: 100%;
+}
+
+.project-slider__viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.project-slider__track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.project-slide {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+/* Fondo difuminado de la misma foto: las fotos verticales se ven completas sin franjas vacías. */
+.project-slide::before {
+    content: "";
+    position: absolute;
+    inset: -40px;
+    background: var(--slide-bg) center / cover no-repeat;
+    filter: blur(28px) brightness(0.45);
+    transform: scale(1.1);
+}
+
+.project-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.project-slide img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    cursor: zoom-in;
+}
+
+.project-slide img:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: -6px;
+}
+
+/* =========================================
+   FLECHAS DEL CARRUSEL
+========================================= */
+
+.project-slider__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    transform: translateY(-50%);
+
+    width: 46px;
+    height: 46px;
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+    background: rgba(17, 17, 17, 0.55);
+    color: var(--white);
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.9;
+
+    transition: opacity 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.project-slider__arrow:hover {
+    background: rgba(17, 17, 17, 0.85);
+    border-color: var(--gold);
+}
+
+.project-slider__arrow:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}
+
+.project-slider__arrow--prev {
+    left: 15px;
+}
+
+.project-slider__arrow--next {
+    right: 15px;
+}
+
+/* =========================================
+   PUNTOS DEL CARRUSEL
+========================================= */
+
+.project-slider__bottom {
+    display: flex;
+    justify-content: center;
+    padding-top: 22px;
+}
+
+.project-slider__dots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Área táctil de 24px con un punto visible de 7px. */
+.project-slider__dot {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.project-slider__dot::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #bdbdbd;
+    transform: translate(-50%, -50%);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.project-slider__dot:hover::after {
+    transform: translate(-50%, -50%) scale(1.25);
+}
+
+.project-slider__dot.active::after {
+    background: var(--gold);
+    transform: translate(-50%, -50%) scale(1.35);
+}
+
+.project-slider__dot:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: -2px;
+}
+
+/* =========================================
+   LIGHTBOX
+========================================= */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 90px;
+    background: rgba(17, 17, 17, 0.96);
+}
+
+.lightbox.is-open {
+    display: flex;
+}
+
+.lightbox-open {
+    overflow: hidden;
+}
+
+.lightbox__figure {
+    max-width: min(1100px, 90vw);
+    max-height: 85vh;
+    margin: 0;
+}
+
+.lightbox__image {
+    display: block;
+    max-width: 100%;
+    max-height: 78vh;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.lightbox__caption {
+    margin-top: 15px;
+    color: var(--gray-light);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.lightbox__close,
+.lightbox__arrow {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.lightbox__close:hover,
+.lightbox__arrow:hover {
+    border-color: var(--gold);
+    background: rgba(200, 162, 74, 0.16);
+}
+
+.lightbox__close:focus-visible,
+.lightbox__arrow:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+
+.lightbox__close {
+    top: 25px;
+    right: 30px;
+    width: 42px;
+    height: 42px;
+    font-size: 28px;
+    line-height: 1;
+}
+
+.lightbox__arrow {
+    top: 50%;
+    width: 54px;
+    height: 75px;
+    transform: translateY(-50%);
+    font-size: 24px;
+}
+
+.lightbox__arrow--prev {
+    left: 25px;
+}
+
+.lightbox__arrow--next {
+    right: 25px;
+}
+
+/* =========================================
+   INFORMACIÓN DEL PROYECTO
+========================================= */
+
+.project-information {
+    padding: 20px 0 110px;
+    background: var(--white);
+    color: var(--black);
+}
+
+.project-information__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.project-information__category {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.project-status {
+    flex-shrink: 0;
+    padding: 7px 10px;
+    border: 1px solid #bdbdb7;
+    color: #555555;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.project-status--progress {
+    border-color: var(--gold);
+    background: var(--gold);
+    color: var(--black);
+    font-weight: 700;
+}
+
+.project-information__bottom {
+    padding: 40px 0 0;
+}
+
+.project-information__bottom p {
+    max-width: 68ch;
+    color: #444444;
+    font-size: 18px;
+    line-height: 1.85;
+}
+
+/* =========================================
+   FICHA TÉCNICA
+========================================= */
+
+.project-information__box {
+    width: 100%;
+    margin-top: 50px;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+}
+
+.project-information__box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 25px;
+    padding: 24px 26px;
+    background: #f1f1ec;
+    border-bottom: 1px solid #cccccc;
+}
+
+.project-information__box-header h2 {
+    margin-top: 15px;
+    font-size: clamp(26px, 3vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.project-information__box-number {
+    color: #999999;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+/* Cada celda dibuja su línea derecha e inferior con una sombra de 1px;
+   las del borde exterior quedan recortadas. Funciona con cualquier cantidad de datos. */
+.project-information__data {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.project-information__item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    padding: 24px 22px 26px;
+    box-shadow: 1px 0 0 #cccccc, 0 1px 0 #cccccc;
+}
+
+.project-information__item span {
+    color: #777777;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.project-information__item strong {
+    color: var(--black);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+/* =========================================
+   VIDEO DEL PROYECTO
+========================================= */
+
+.project-tour {
+    padding: 90px 0;
+    background: var(--black);
+    color: var(--white);
+}
+
+.project-tour__heading h2 {
+    margin-top: 18px;
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1;
+    letter-spacing: -1.5px;
+}
+
+.project-tour__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.project-tour__item {
+    width: min(100%, 360px);
+    margin: 0;
+}
+
+.project-tour__media {
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    background: #1a1a1a;
+}
+
+/* =========================================
+   NAVEGACIÓN ENTRE PROYECTOS
+========================================= */
+
+.project-pager {
+    padding: 0 0 90px;
+    background: var(--white);
+    color: var(--black);
+}
+
+.project-tour + .project-pager {
+    padding-top: 90px;
+}
+
+.project-pager__inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #cccccc;
+}
+
+.project-pager__link {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.project-pager__link--next {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.project-pager__link span {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.project-pager__link strong {
+    font-size: clamp(20px, 2.4vw, 30px);
+    letter-spacing: -1px;
+    transition: color 0.3s ease;
+}
+
+.project-pager__link:hover strong {
+    color: #8a6a22;
+}
+
+.project-pager__all {
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--black);
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.project-pager a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .project-gallery--offset {
+        padding-top: 150px;
+    }
+
+    .project-gallery__heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .project-information__data {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-pager__inner {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .project-pager__all {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: center;
+    }
+
+}
+
+/* =========================================
+   MÓVIL
+========================================= */
+
+@media (max-width: 700px) {
+
+    .project-floating-logo {
+        width: 52px;
+        height: 52px;
+        padding: 8px;
+    }
+
+    .project-gallery {
+        padding-bottom: 45px;
+    }
+
+    .project-gallery--offset {
+        padding-top: 125px;
+    }
+
+    .project-gallery__heading {
+        margin-bottom: 25px;
+    }
+
+    .project-gallery__heading h1 {
+        letter-spacing: -2px;
+    }
+
+    .project-slider__track {
+        aspect-ratio: 1 / 1;
+    }
+
+    .project-slider__arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 17px;
+    }
+
+    .project-slider__arrow--prev {
+        left: 8px;
+    }
+
+    .project-slider__arrow--next {
+        right: 8px;
+    }
+
+    .lightbox {
+        padding: 65px 12px;
+    }
+
+    .lightbox__figure {
+        max-width: 100%;
+    }
+
+    .lightbox__arrow {
+        top: auto;
+        bottom: 18px;
+        width: 48px;
+        height: 44px;
+        transform: none;
+        font-size: 18px;
+    }
+
+    .lightbox__arrow--prev {
+        left: calc(50% - 56px);
+    }
+
+    .lightbox__arrow--next {
+        right: calc(50% - 56px);
+    }
+
+    .lightbox__close {
+        top: 14px;
+        right: 14px;
+    }
+
+    .project-information {
+        padding: 10px 0 70px;
+    }
+
+    .project-information__top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .project-information__bottom {
+        padding-top: 28px;
+    }
+
+    .project-information__bottom p {
+        font-size: 16px;
+        line-height: 1.75;
+    }
+
+    .project-information__box {
+        margin-top: 35px;
+    }
+
+    .project-information__box-header {
+        padding: 18px 16px;
+    }
+
+    .project-information__box-header h2 {
+        font-size: 24px;
+    }
+
+    .project-information__item {
+        gap: 8px;
+        padding: 16px 14px 18px;
+    }
+
+    .project-information__item span {
+        font-size: 10px;
+    }
+
+    .project-information__item strong {
+        font-size: 16px;
+    }
+
+    .project-tour {
+        padding: 65px 0;
+    }
+
+    .project-tour__grid {
+        flex-wrap: nowrap;
+        gap: 14px;
+        margin-top: 30px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 6px;
+    }
+
+    .project-tour__item {
+        flex: 0 0 min(78%, 320px);
+        scroll-snap-align: start;
+    }
+
+    .project-tour + .project-pager {
+        padding-top: 60px;
+    }
+
+    .project-pager {
+        padding-bottom: 70px;
+    }
+
+    .project-pager__inner {
+        gap: 22px 16px;
+    }
+
+}
