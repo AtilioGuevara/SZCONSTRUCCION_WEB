@@ -54,12 +54,13 @@ function initSiteLinks() {
         emailLink?.remove();
 
         const links = [...socials.querySelectorAll(".footer__social")];
-        links.slice(3).forEach((link) => link.remove());
+        links.slice(4).forEach((link) => link.remove());
         const normalizedLinks = socials.querySelectorAll(".footer__social");
-        if (normalizedLinks.length < 3) return;
+        if (normalizedLinks.length < 4) return;
 
         const imagePath = window.location.pathname.includes("/proyectos/") ? "../images/social/" : "images/social/";
         const contacts = [
+            ["https://www.facebook.com/szconstrucion", "Facebook", "Facebook", "LogoFace.png"],
             ["https://www.instagram.com/sz_construccion?stkn=ZDNlZDc0MzIxNw==", "Instagram", "Instagram", "LogoInsta.png"],
             ["https://www.tiktok.com/@sz_construccionsv?is_from_webapp=1&sender_device=pc", "TikTok", "TikTok", "LogoTikTok.png"],
             ["https://wa.me/50374683677", "WhatsApp", "WhatsApp", "LogoWha.png"]
@@ -91,6 +92,7 @@ function initProjectFooters() {
         </nav>`;
     const socialMarkup = `
         <div class="footer__socials" aria-label="Redes sociales">
+            <a href="https://www.facebook.com/szconstrucion" class="footer__social" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="${imagePath}LogoFace.png" alt="">Facebook</a>
             <a href="https://www.instagram.com/sz_construccion?stkn=ZDNlZDc0MzIxNw==" class="footer__social" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="${imagePath}LogoInsta.png" alt="">Instagram</a>
             <a href="https://www.tiktok.com/@sz_construccionsv?is_from_webapp=1&amp;sender_device=pc" class="footer__social" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><img src="${imagePath}LogoTikTok.png" alt="">TikTok</a>
             <a href="https://wa.me/50374683677" class="footer__social" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><img src="${imagePath}LogoWha.png" alt="">WhatsApp</a>

@@ -33,6 +33,17 @@ videos/proyecto-1/             Recorrido JM (también se usa en el inicio)
 videos/proyecto-2/             Recorridos LM
 ```
 
+### Redes sociales
+
+El botón de Facebook del pie de página enlaza a la página oficial:
+
+```html
+<a href="https://www.facebook.com/szconstrucion" class="footer__social"
+   target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+  <img src="images/social/LogoFace.png" alt="">Facebook
+</a>
+```
+
 La numeración de carpetas y fichas coincide con el CATÁLOGO SZ CONSTRUCCIÓN 2026.
 Cada ficha tiene su contenido escrito directamente en el HTML (ya no se reemplaza con JavaScript).
 
